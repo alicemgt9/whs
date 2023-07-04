@@ -53,6 +53,15 @@ public class UserController {
         return userService.saveOrUpdate(user)?Result.suc():Result.fail();
     }
 
+    //登录
+    @PostMapping("/login")
+    public Result login(@RequestBody User user){
+        List list = userService.lambdaQuery()
+                .eq(User::getAcc,user.getAcc())
+                .eq(User::getPassword,user.getPassword()).list();
+        return list.size()>0?Result.suc(list.get(0)):Result.fail();
+    }
+
     //删除
     @GetMapping("/delete")
     public Result delete(Integer id){
