@@ -10,6 +10,7 @@ import com.jhb.whs.entity.User;
 import com.jhb.whs.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -42,8 +43,8 @@ public class UserController {
 
     //新增
     @PostMapping("/mod")
-    public boolean mod(@RequestBody User user){
-        return userService.updateById(user);
+    public Result mod(@RequestBody User user){
+        return userService.updateById(user)?Result.suc(): Result.fail();
     }
 
     //修改或新增
