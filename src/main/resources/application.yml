@@ -1,0 +1,9 @@
+server:
+  port: 81
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/whs?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: wjzkx123
+    driver-class-name: com.mysql.jdbc.Driver

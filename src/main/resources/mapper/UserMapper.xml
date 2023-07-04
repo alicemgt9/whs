@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhb.whs.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.jhb.whs.entity.User">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="acc" property="acc" />
+        <result column="password" property="password" />
+        <result column="age" property="age" />
+        <result column="gender" property="gender" />
+        <result column="phone" property="phone" />
+        <result column="role_id" property="roleId" />
+        <result column="isvalid" property="isvalid" />
+    </resultMap>
+
+    <select id="pageC" resultType="com.jhb.whs.entity.User">
+        select * from user
+    </select>
+
+    <select id="pageCC" resultType="com.jhb.whs.entity.User">
+        select * from user ${ew.customSqlSegment}
+    </select>
+
+</mapper>
