@@ -1,9 +1,13 @@
 package com.jhb.whs.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.jhb.whs.common.Result;
+import com.jhb.whs.entity.Menu;
+import com.jhb.whs.service.MenuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -14,7 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2023-07-06
  */
 @RestController
-@RequestMapping("/whs/menu")
+@RequestMapping("/menu")
 public class MenuController {
+
+    @Autowired
+    private MenuService menuService;
+
+    @GetMapping("/list")
+    public Result list(@RequestParam String roleId){
+        List list = menuService.lambdaQuery().like(Menu::getMenuRight,roleId).list();
+        return Result.suc(list);
+    }
 
 }

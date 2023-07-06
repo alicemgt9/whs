@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jhb.whs.common.QueryPageParam;
 import com.jhb.whs.common.Result;
+import com.jhb.whs.entity.Menu;
 import com.jhb.whs.entity.User;
+import com.jhb.whs.service.MenuService;
 import com.jhb.whs.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private MenuService menuService;
 
     @GetMapping("/list")
     public List<User> listAll(){
@@ -59,7 +63,16 @@ public class UserController {
         List list = userService.lambdaQuery()
                 .eq(User::getAcc,user.getAcc())
                 .eq(User::getPassword,user.getPassword()).list();
-        return list.size()>0?Result.suc(list.get(0)):Result.fail();
+        if(list.size()>0){
+            User user1 = (User) list.get(0);
+            List menuList = menuService.lambdaQuery().like(Menu::getMenuRight,user1.getRoleId()).list();
+            HashMap res = new HashMap();
+            res.put("user",user1);
+            res.put("menu",menuList);
+            return Result.suc(res);
+
+        }
+        return Result.fail();
     }
 
     //删除
