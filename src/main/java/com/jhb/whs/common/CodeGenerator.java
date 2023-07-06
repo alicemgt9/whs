@@ -9,12 +9,17 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.function.Consumer;
 
 public class CodeGenerator {
     public static void main(String[] args) {
         List<String> tables = new ArrayList<>();
-        tables.add("user");
+        String table;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入表名字");
+        table = sc.next();
+        tables.add(table);
 
         FastAutoGenerator.create("jdbc:mysql://localhost:3306/whs","root","wjzkx123")
                 .globalConfig(builder -> {

@@ -15,12 +15,4 @@
         <result column="isvalid" property="isvalid" />
     </resultMap>
 
-    <select id="pageC" resultType="com.jhb.whs.entity.User">
-        select * from user
-    </select>
-
-    <select id="pageCC" resultType="com.jhb.whs.entity.User">
-        select * from user ${ew.customSqlSegment}
-    </select>
-
 </mapper>
