@@ -146,6 +146,7 @@ public class UserController {
 
         String name = (String)param.get("name");
         String gender = (String)param.get("gender");
+        String roleId = (String)param.get("roleId");
 
         Page<User> page = new Page<>();
         page.setCurrent(query.getPageNum());
@@ -158,6 +159,9 @@ public class UserController {
         }
         if(StringUtils.isNotBlank(gender)){
             lambdaQueryWrapper.eq(User::getGender,gender);
+        }
+        if(StringUtils.isNotBlank(roleId)){
+            lambdaQueryWrapper.eq(User::getRoleId,roleId);
         }
 
         //IPage result = userService.pageC(page);
